@@ -1,0 +1,56 @@
+﻿<Window x:Class="KukaQRCodeGenerationTools2026.View.SettingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KukaQRCodeGenerationTools2026.View"
+        xmlns:vm="clr-namespace:KukaQRCodeGenerationTools2026.ViewModel"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=vm:SettingWindowViewModel}"
+        Title="SettingWindow" Height="450" Width="500" MinHeight="450" MinWidth="500" ResizeMode="CanMinimize">
+    <StackPanel Margin="8">
+        <GroupBox Header="服务器">
+            <StackPanel Margin="4">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="*" Width="5" Foreground="Red" VerticalAlignment="Center"/>
+                    <TextBlock Text="服务器 IP"
+                               Width="60" VerticalAlignment="Center"/>
+                    <TextBox Height="28" Width="200" VerticalContentAlignment="Center"
+                             Text="{Binding ServerIp}"/>
+                    <Button Content="测试连接" Height="28" Width="70" Margin="8,0,0,0"
+                            Command="{Binding TestConnectCommand}"/>
+                </StackPanel>
+                <TextBlock Text="{Binding ServerIpMsg}" Foreground="Red" Margin="65,0,0,0" />
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="*" Width="5" Foreground="Red" VerticalAlignment="Center"/>
+                    <TextBlock Text="用户名"
+                               Width="60" VerticalAlignment="Center"/>
+                    <TextBox Height="28" Width="150" VerticalContentAlignment="Center"
+                             Text="{Binding ServerUsername}"/>
+                </StackPanel>
+                <TextBlock Text="{Binding ServerUsernameMsg}" Foreground="Red" Margin="65,0,0,0" />
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="*" Width="5" Foreground="Red" VerticalAlignment="Center"/>
+                    <TextBlock Text="密码"
+                               Width="60" VerticalAlignment="Center"/>
+                    <TextBox Height="28" Width="150" VerticalContentAlignment="Center"
+                             Text="{Binding ServerPassword}"/>
+                    <Button Content="验证账户" Height="26" Width="70" Margin="8,0,0,0"
+                            Command="{Binding ValidateUserCommand}"/>
+                </StackPanel>
+                <TextBlock Text="{Binding ServerPasswordMsg}" Foreground="Red" Margin="65,0,0,0" />
+                <DockPanel>
+                    <TextBlock Text="Token" VerticalAlignment="Top" Margin="5,0,0,0"
+                               Width="60"/>
+                    <TextBox Height="112" IsReadOnly="True" TextWrapping="Wrap"
+                             Text="{Binding ServerUserToken}"
+                             ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                </DockPanel>
+            </StackPanel>
+        </GroupBox>
+        <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+            <Button Content="保存" Height="28" Width="60"
+                    Command="{Binding SaveCommand}"/>
+        </StackPanel>
+    </StackPanel>
+</Window>
