@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:KukaQRCodeGenerationTools2026.View"
         xmlns:vm="clr-namespace:KukaQRCodeGenerationTools2026.ViewModel"
         mc:Ignorable="d" d:DataContext="{d:DesignInstance Type=vm:MainWindowViewModel}"
-        Title="KUKA 二维码生成工具 2026 - v0.1" Height="550" Width="800">
+        Title="KUKA 二维码生成工具 2026 - v0.1" Height="750" Width="1080"
+        Closed="Window_Closed" Loaded="Window_Loaded">
     <Grid Margin="8,2,8,8">
         <Grid.RowDefinitions>
             <RowDefinition Height="60" />
@@ -15,20 +16,61 @@
         </Grid.RowDefinitions>
 
         <GroupBox Header="地图">
-            <StackPanel Orientation="Horizontal" Margin="2">
+            <StackPanel Orientation="Horizontal" Margin="4,0">
+                <Button Content="刷新地图" Height="26" Width="70" Margin="0,0,8,0"
+                        Click="BtnRefreshMap_Click"/>
                 <Button Content="选择地图" Height="26" Width="70" Margin="0,0,8,0"
-                        Click="BtnChooseMap_Click"/>
+                            Click="BtnChooseMap_Click"/>
 
                 <TextBlock Text="当前地图：" VerticalAlignment="Center" Width="60" />
                 <TextBlock Text="{Binding CurrentMapName}" VerticalAlignment="Center" Width="150" />
-                
+
                 <TextBlock Text="片区：" VerticalAlignment="Center" Width="60" />
                 <TextBlock Text="{Binding CurrentFloorNumber}" VerticalAlignment="Center" Width="150" />
-                
+
                 <TextBlock Text="地图编码：" VerticalAlignment="Center" Width="60" />
                 <TextBlock Text="{Binding CurrentMapCode}" VerticalAlignment="Center" Width="150" />
+
             </StackPanel>
         </GroupBox>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel>
+                <GroupBox Header="打印机">
+                    <StackPanel Margin="4">
+                        <!--<TextBlock Text="打印机" Margin="0,0,0,4" />-->
+                        <ComboBox Height="28" VerticalContentAlignment="Center"
+                                  ItemsSource="{Binding PrinterList}"
+                                  SelectedItem="{Binding SelectedPrinter}"/>
+
+                        <Button Content="打印" Height="28" Margin="0,8,0,0" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="选中二维码">
+                    <StackPanel Margin="8,4">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="x(mm)" Width="60" VerticalAlignment="Center" />
+                            <TextBox Height="28" Width="120" IsReadOnly="True" IsEnabled="False" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                            <TextBlock Text="y(mm)" Width="60" VerticalAlignment="Center" />
+                            <TextBox Height="28" Width="120" IsReadOnly="True" IsEnabled="False" />
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+
+            <Border Grid.Column="1" Margin="8,8,0,8" BorderBrush="LightGray" BorderThickness="1">
+                <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
+                    <Canvas x:Name="canQrCodeMap" />
+                </ScrollViewer>
+            </Border>
+        </Grid>
 
         <StackPanel Orientation="Horizontal" Grid.Row="2">
             <Button Content="设置" Width="90"

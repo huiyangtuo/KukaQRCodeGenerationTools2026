@@ -185,7 +185,7 @@ namespace KukaQRCodeGenerationTools2026.ViewModel
                     FloorNumber = _selectedMap.FloorNumber,
                 };
 
-                SelectedMapEvent?.Invoke(MapList.ElementAt(selectedMap));
+                SelectedMapEvent?.Invoke(selectedMap);
                 CloseWindowEvent?.Invoke();
             }
             catch (Exception ex)
